@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="MauiTotpApp.Views.QrScanPage"
+             Title="Scan a QR Code">
+    <Grid>
+        <zxing:CameraBarcodeReaderView
+            Grid.Row="0"
+            x:Name="qrReader"/>
+        <!-- Responsible for the main background dim -->
+        <Polygon
+            Grid.Row="0"
+            Points="0,0 1000,0 1000,1000 0,1000"
+            Fill="Transparent"
+            Stroke="Black"
+            Opacity="0.5"
+            StrokeThickness="750"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <Polygon.GestureRecognizers>
+                <!-- This gesture recongisation is not done through MVVM as there is no documented way to do it, according to the ZXing library docs -->
+                <TapGestureRecognizer
+                    Tapped="TapGestureRecognizer_Tapped"
+                    NumberOfTapsRequired="2"/>
+            </Polygon.GestureRecognizers>
+        </Polygon>
+        <!-- Responsible for the border around -->
+        <Polygon
+            Grid.Row="0"
+            Points="0,0 250,0, 250,250 0,250"
+            Fill="Transparent"
+            Style="{StaticResource QrScanBorder}"
+            StrokeThickness="3"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+        <!-- Flip Camera & Toggle Flash Buttons -->
+        <ImageButton
+            Grid.Row="0"
+            ZIndex="10"
+            Source="{FontImage &#xe0d8;, FontFamily=FontAwesomeSolid, Size=500, Color=White}"
+            Clicked="FlipCameraButton_Clicked"
+            HeightRequest="50"
+            WidthRequest="50"
+            HorizontalOptions="Start"
+            VerticalOptions="End"
+            Margin="50"/>
+        <!-- Different margin and widths to account for percieved icon size differences -->
+        <ImageButton
+            Grid.Row="0"
+            ZIndex="10"
+            Source="{FontImage &#xf0eb;, FontFamily=FontAwesome, Size=500, Color=White}"
+            Clicked="ToggleFlashlightButton_Clicked"
+            HeightRequest="40"
+            WidthRequest="40"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Margin="55"/>
+    </Grid>
+</ContentPage>

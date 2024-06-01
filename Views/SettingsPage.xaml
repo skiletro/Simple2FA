@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MauiTotpApp.ViewModels"
+             x:Class="MauiTotpApp.Views.SettingsPage"
+             Title="Settings">
+    <ContentPage.BindingContext>
+        <viewmodels:SettingsViewModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <VerticalStackLayout Padding="20,0,20,20" Spacing="20">
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Data Manipulation"
+                    SemanticProperties.HeadingLevel="Level1"
+                    Style="{StaticResource Header}"/>
+                <Button
+                    Text="Export Database as a JSON file"
+                    Command="{Binding ExportToJSON_Command}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Debugging"
+                    SemanticProperties.HeadingLevel="Level1"
+                    Style="{StaticResource Header}"/>
+                <Button
+                    Text="Reset Database"
+                    Command="{Binding ResetDatabase_Command}"/>
+                <Button
+                    Text="Import Sample Codes"
+                    Command="{Binding ImportSampleCodes_Command}"/>
+                <Button
+                    Text="Import a Large Amount of Codes"
+                    Command="{Binding ImportSampleCodesLarge_Command}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

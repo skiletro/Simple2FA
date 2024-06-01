@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MauiTotpApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiTotpApp.Views.CodesPage"
+             Title="Codes">
+    <ContentPage.BindingContext>
+        <viewmodels:CodesViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            EventName="Appearing"
+            Command="{Binding PageAppearing_Command}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Help"
+            Command="{Binding OpenHelpButton_Command}"
+            IconImageSource="{FontImage &#xf059;, FontFamily=FontAwesome, Size=250, Color={StaticResource PrimaryDark}}"
+            SemanticProperties.Description="Help"
+            SemanticProperties.Hint="Open the help menu"/>
+        <ToolbarItem
+            Text="Refresh"
+            Command="{Binding RefreshCodesButton_Command}"
+            IconImageSource="{FontImage &#xf021;, FontFamily=FontAwesomeSolid, Size=250, Color={StaticResource PrimaryDark}}"
+            SemanticProperties.Description="Refresh Codes"
+            SemanticProperties.Hint="Refresh the code view"/>
+        <ToolbarItem
+            Text="Add"
+            Command="{Binding AddNewCodeButton_Command}"
+            IconImageSource="{FontImage &#x2b;, FontFamily=FontAwesomeSolid, Size=250, Color={StaticResource PrimaryDark}}"
+            SemanticProperties.Description="Add Codes"
+            SemanticProperties.Hint="Add new codes"/>
+    </ContentPage.ToolbarItems>
+
+
+    <CollectionView
+        x:Name="totpCodesCollection"
+        ItemsSource="{Binding Data}"
+        SelectionMode="Single">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <ScrollView Padding="20" Scrolled="ScrollView_Scrolled">
+                <StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CopyToClipboard_Tapped"/>
+                    </StackLayout.GestureRecognizers>
+                    <FlexLayout JustifyContent="SpaceBetween">
+                        <VerticalStackLayout>
+                            <Label
+                                Text="{Binding Name}"
+                                Style="{StaticResource ServiceName}"/>
+                            <Label
+                                Text="{Binding Code}"
+                                Style="{StaticResource Code}"/>
+                        </VerticalStackLayout>
+                        <Label
+                            Text="{Binding RemainingTime}"
+                            FontSize="36"/>
+                    </FlexLayout>
+                    <ProgressBar
+                        Progress="{Binding RemainingTimeNormalised}"
+                        Style="{StaticResource TimeRemaingBar}"/>
+                </StackLayout>
+                </ScrollView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        <CollectionView.EmptyView>
+            <StackLayout
+                Padding="20"
+                Spacing="10">
+                <VerticalStackLayout
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand">
+                    <Label
+                        Text="No codes; why not go add some?"
+                        Style="{StaticResource NoCodes}"
+                        SemanticProperties.Description="No codes are currently added."/>
+                    <Label
+                        Text="Tap the + in the top right corner!"
+                        Style="{StaticResource NoCodes}"/>
+                </VerticalStackLayout>
+                <OnPlatform x:TypeArguments="View">
+                    <On Platform="Android">
+                        <Button
+                            Text="Help! I don’t know what to do!"
+                            Command="{Binding OpenHelpButton_Command}"
+                            SemanticProperties.Hint="Open the help menu"/>
+                    </On>
+                </OnPlatform>
+            </StackLayout>
+        </CollectionView.EmptyView>
+    </CollectionView>
+</ContentPage>

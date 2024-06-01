@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MauiTotpApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:MauiTotpApp.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Simple2FA">
+    <TabBar>
+        <ShellContent
+            Title="Codes"
+            ContentTemplate="{DataTemplate views:CodesPage}"
+            Icon="{FontImage &#xf017;, FontFamily=FontAwesome}"/>
+        <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate views:SettingsPage}"
+            Icon="{FontImage &#xf1de;, FontFamily=FontAwesomeSolid}"/>
+        <ShellContent
+            Title="About"
+            ContentTemplate="{DataTemplate views:AboutPage}"
+            Icon="{FontImage &#xf2bb;, FontFamily=FontAwesome}"/>
+    </TabBar>
+</Shell>

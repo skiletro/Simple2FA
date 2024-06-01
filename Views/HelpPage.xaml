@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MauiTotpApp.ViewModels"
+             xmlns:shared="clr-namespace:MauiTotpApp.Shared"
+             x:Class="MauiTotpApp.Views.HelpPage"
+             Title="Frequently Asked Questions">
+    <VerticalStackLayout
+         Padding="20,0,20,20" Spacing="20">
+        <VerticalStackLayout Spacing="5">
+            <Label
+                Text="What is 2FA?"
+                Style="{StaticResource Header}"
+                SemanticProperties.HeadingLevel="Level1"/>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="2FA, also known as 2-Factor Authentication, is a type of security measure which requires a user to have two forms of identification before being granted access to data. The source and additional resources for this information can be found " />
+                        <shared:HyperlinkSpan Text="here"  Url="https://www.microsoft.com/en-us/security/business/security-101/what-is-two-factor-authentication-2fa"/>
+                        <Span Text="."/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </VerticalStackLayout>
+        
+        <VerticalStackLayout Spacing="5">
+            <Label
+                Text="How can I enable 2FA?"
+                Style="{StaticResource Header}"
+                SemanticProperties.HeadingLevel="Level1"/>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="This highly depends on the website. Some websites do not even support 2FA. You can check a website such as "/>
+                        <shared:HyperlinkSpan Text="2FA Directory" Url="https://2fa.directory/gb/"/>
+                        <Span Text=" to check if the website supports it. Then you need to follow that specific websites instructions on how to enable the feature."/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </VerticalStackLayout>
+        
+        <VerticalStackLayout Spacing="5">
+            <Label
+                Text="How can I add a code?"
+                Style="{StaticResource Header}"
+                SemanticProperties.HeadingLevel="Level1"/>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="On the 'Codes' tab, tap or click on the "/>
+                        <Span FontFamily="FontAwesome" Text=""/>
+                        <Span Text=" icon in the top right corner to open the 'Add' page. From there, you can either scan a QR code that is presented on the website you're trying to add 2FA to, or you can manually enter the service and key name into the boxes present"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

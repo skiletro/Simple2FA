@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MauiTotpApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiTotpApp.Views.AdderPage"
+             Title="Add a New Key">
+    <ContentPage.BindingContext>
+        <viewmodels:AdderViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout
+        Padding="20">
+
+        <OnPlatform x:TypeArguments="View">
+            <On Platform="Android">
+                <StackLayout>
+                    <Button
+                    Text="Scan QR Code"
+                    Command="{Binding OpenQRScanner_Command}"/>
+                    <Label
+                    Text="- or -"
+                    HorizontalOptions="Center"
+                    Padding="25"/>
+                </StackLayout>
+            </On>
+        </OnPlatform>
+
+        <Label
+            Text="Enter manually"
+            Style="{StaticResource Header}"/>
+
+        <Entry
+            x:Name="serviceName"
+            Placeholder="Service Name"
+            Text="{Binding ServiceName}"/>
+        <Entry
+            x:Name="totpKey"
+            Placeholder="Your Key"
+            Text="{Binding TotpKey}"/>
+        <Button
+            x:Name="addButton"
+            Text="Add"
+            Command="{Binding AddNewService_Commmand}"/>
+    </VerticalStackLayout>
+</ContentPage>
